@@ -64,85 +64,98 @@ export const VideoMonitoringPanel: React.FC<VideoMonitoringPanelProps> = ({
   // Precision keyframe vehicle trajectories for CAM-H01 (34.5s highway footage)
   // Calibrated against ground-truth frames. Bounding boxes exist STRICTLY on vehicles, zero phantom boxes
   const HIGHWAY_VEHICLE_TRACKS = [
-    // 1. Light Blue Volvo V70 Estate (#301) in Lane 1 (driving away, t=0 to 6.2s)
+    // 1. Light Blue Volvo Wagon (#301) in Lane 1 (driving away, t=0.0 to 3.8s)
     {
       id: 'det-h301',
       trackingId: 301,
       vehicleType: 'car' as const,
-      confidence: 0.95,
+      confidence: 0.96,
       speedKmH: 88,
       licensePlate: 'DJK-441',
-      plateConfidence: 0.92,
+      plateConfidence: 0.93,
       violations: [] as ViolationType[],
       keyframes: [
-        { t: 0.0, x: 52.0, y: 68.0, w: 15.0, h: 14.0 },
-        { t: 1.5, x: 53.5, y: 58.0, w: 12.0, h: 11.5 },
-        { t: 3.0, x: 55.0, y: 48.0, w: 9.0, h: 8.5 },
-        { t: 4.5, x: 56.5, y: 40.0, w: 6.5, h: 6.5 },
-        { t: 6.0, x: 57.5, y: 33.0, w: 4.5, h: 4.5 },
+        { t: 0.0, x: 55.0, y: 46.0, w: 7.5, h: 8.5 },
+        { t: 1.5, x: 52.5, y: 42.1, w: 5.0, h: 5.8 },
+        { t: 2.8, x: 55.5, y: 35.0, w: 4.2, h: 4.8 },
+        { t: 3.8, x: 57.5, y: 30.5, w: 3.2, h: 3.8 },
       ]
     },
-    // 2. Oncoming Red Compact Hatchback (#341) on Left Carriageway (driving towards camera, t=0 to 5.0s)
+    // 2. Oncoming Red Hatchback (#341) on Left Road (approaching camera, t=0.5 to 4.2s)
     {
       id: 'det-h341',
       trackingId: 341,
       vehicleType: 'car' as const,
-      confidence: 0.94,
+      confidence: 0.95,
       speedKmH: 86,
       licensePlate: 'RED-409',
-      plateConfidence: 0.90,
+      plateConfidence: 0.91,
       violations: [] as ViolationType[],
       keyframes: [
-        { t: 0.0, x: 34.0, y: 35.0, w: 4.5, h: 4.5 },
-        { t: 1.5, x: 27.5, y: 39.0, w: 6.0, h: 6.0 },
-        { t: 3.0, x: 19.0, y: 44.0, w: 8.0, h: 8.0 },
-        { t: 4.0, x: 12.0, y: 48.0, w: 10.0, h: 10.0 },
-        { t: 5.0, x: 2.0, y: 54.0, w: 12.5, h: 12.5 },
+        { t: 0.5, x: 28.0, y: 34.0, w: 4.8, h: 4.8 },
+        { t: 1.5, x: 21.2, y: 37.9, w: 6.9, h: 6.7 },
+        { t: 2.8, x: 12.0, y: 44.0, w: 9.8, h: 9.2 },
+        { t: 3.8, x: 2.0, y: 52.0, w: 13.5, h: 12.5 },
+        { t: 4.2, x: 0.0, y: 56.0, w: 14.5, h: 13.5 },
       ]
     },
-    // 3. Black Audi Sedan (#306) in Lane 2/3 (SPEEDING: 116 km/h in 90 km/h zone, t=4.5 to 12.5s)
-    // Tightly wraps vehicle body without stretching down into asphalt
+    // 3. Black Audi Sedan (#306) in Lane 2/3 (SPEEDING: 116 km/h, driving away, t=4.0 to 10.0s)
     {
       id: 'det-h306',
       trackingId: 306,
       vehicleType: 'car' as const,
-      confidence: 0.97,
+      confidence: 0.98,
       speedKmH: 116,
       isSpeeding: true,
       licensePlate: 'KLR-714',
-      plateConfidence: 0.94,
+      plateConfidence: 0.95,
       violations: ['speed_violation'] as ViolationType[],
       keyframes: [
-        { t: 4.5, x: 66.5, y: 86.0, w: 13.5, h: 14.0 },
-        { t: 5.5, x: 66.2, y: 74.0, w: 11.5, h: 12.5 },
-        { t: 6.5, x: 66.0, y: 64.0, w: 9.8, h: 11.5 },
-        { t: 7.2, x: 65.8, y: 58.8, w: 8.5, h: 10.9 }, // Tight ground-truth fit
-        { t: 8.5, x: 66.2, y: 50.0, w: 7.2, h: 9.0 },
-        { t: 10.0, x: 66.8, y: 42.0, w: 5.8, h: 7.0 },
-        { t: 11.5, x: 67.5, y: 35.5, w: 4.5, h: 5.5 },
-        { t: 12.5, x: 68.2, y: 31.5, w: 3.5, h: 4.2 },
+        { t: 4.0, x: 67.5, y: 84.0, w: 13.5, h: 14.5 },
+        { t: 5.2, x: 66.8, y: 70.0, w: 11.0, h: 12.0 },
+        { t: 6.2, x: 65.5, y: 57.0, w: 8.8, h: 9.8 },
+        { t: 7.2, x: 64.7, y: 46.2, w: 5.6, h: 7.1 },
+        { t: 8.5, x: 66.2, y: 38.0, w: 4.2, h: 5.5 },
+        { t: 10.0, x: 67.5, y: 30.5, w: 3.0, h: 3.8 },
       ]
     },
-    // 4. Oncoming Dark Station Wagon (#345) on Left Carriageway (t=3.5 to 8.2s)
+    // 4. Oncoming Dark Station Wagon (#345) on Left Road (t=4.5 to 8.8s)
     {
       id: 'det-h345',
       trackingId: 345,
       vehicleType: 'car' as const,
-      confidence: 0.95,
-      speedKmH: 90,
+      confidence: 0.94,
+      speedKmH: 88,
       licensePlate: 'GOT-331',
       plateConfidence: 0.90,
       violations: [] as ViolationType[],
       keyframes: [
-        { t: 3.5, x: 38.0, y: 33.0, w: 3.8, h: 3.8 },
-        { t: 5.0, x: 28.0, y: 38.0, w: 6.0, h: 6.0 },
-        { t: 6.5, x: 16.0, y: 42.5, w: 8.5, h: 8.0 },
-        { t: 7.2, x: 8.9, y: 43.5, w: 9.1, h: 8.2 },
-        { t: 8.2, x: 0.0, y: 48.0, w: 11.0, h: 10.0 },
+        { t: 4.5, x: 28.5, y: 35.0, w: 4.5, h: 4.5 },
+        { t: 6.0, x: 21.0, y: 38.5, w: 6.5, h: 6.2 },
+        { t: 7.2, x: 15.0, y: 41.2, w: 7.5, h: 6.2 },
+        { t: 8.2, x: 4.0, y: 46.5, w: 10.5, h: 9.5 },
+        { t: 8.8, x: 0.0, y: 50.0, w: 12.0, h: 11.0 },
       ]
     },
-    // 5. Dark Audi Station Wagon (#316) in Lane 2/3 (SPEEDING: 114 km/h in 90 zone, t=10.5 to 18.0s)
-    // Tightly fits car chassis as it drives away into curve
+    // 5. Light Blue Car ahead of Audi in Lane 3 (#311, t=6.0 to 11.5s)
+    {
+      id: 'det-h311',
+      trackingId: 311,
+      vehicleType: 'car' as const,
+      confidence: 0.96,
+      speedKmH: 88,
+      licensePlate: 'ABC-402',
+      plateConfidence: 0.91,
+      violations: [] as ViolationType[],
+      keyframes: [
+        { t: 6.0, x: 70.0, y: 72.0, w: 12.0, h: 13.0 },
+        { t: 7.2, x: 70.3, y: 58.8, w: 9.1, h: 11.2 },
+        { t: 8.8, x: 70.5, y: 46.0, w: 6.5, h: 7.8 },
+        { t: 10.2, x: 70.8, y: 36.0, w: 4.5, h: 5.5 },
+        { t: 11.5, x: 71.0, y: 29.5, w: 3.2, h: 4.0 },
+      ]
+    },
+    // 6. Dark Audi Station Wagon (#316) in Lane 3 (SPEEDING: 114 km/h, driving away, t=9.8 to 16.5s)
     {
       id: 'det-h316',
       trackingId: 316,
@@ -151,55 +164,73 @@ export const VideoMonitoringPanel: React.FC<VideoMonitoringPanelProps> = ({
       speedKmH: 114,
       isSpeeding: true,
       licensePlate: 'AUD-932',
-      plateConfidence: 0.95,
+      plateConfidence: 0.96,
       violations: ['speed_violation'] as ViolationType[],
       keyframes: [
-        { t: 10.5, x: 72.5, y: 86.0, w: 13.0, h: 14.0 },
-        { t: 11.5, x: 72.8, y: 75.0, w: 11.2, h: 12.5 },
-        { t: 12.5, x: 73.2, y: 66.0, w: 9.5, h: 11.0 },
-        { t: 13.9, x: 73.5, y: 56.5, w: 8.2, h: 9.8 },
-        { t: 15.0, x: 73.8, y: 48.0, w: 6.8, h: 8.0 },
-        { t: 16.5, x: 74.0, y: 39.0, w: 5.2, h: 6.0 },
-        { t: 18.0, x: 74.2, y: 32.5, w: 3.8, h: 4.5 },
+        { t: 9.8, x: 74.0, y: 84.0, w: 13.5, h: 14.5 },
+        { t: 11.2, x: 73.8, y: 72.0, w: 11.2, h: 12.0 },
+        { t: 12.5, x: 73.5, y: 62.0, w: 9.0, h: 10.0 },
+        { t: 13.9, x: 72.8, y: 51.2, w: 6.9, h: 8.3 },
+        { t: 15.2, x: 72.5, y: 40.0, w: 5.0, h: 6.0 },
+        { t: 16.5, x: 72.2, y: 31.0, w: 3.5, h: 4.2 },
       ]
     },
-    // 6. Oncoming White Coach Bus (#350) ("Charmbuss") on Left Road (t=15.5 to 21.2s)
-    // Tightly encloses coach body as it approaches camera
+    // 7. White Hatchback (#318) entering Lane 1 bottom (t=13.0 to 18.0s)
+    {
+      id: 'det-h318',
+      trackingId: 318,
+      vehicleType: 'car' as const,
+      confidence: 0.95,
+      speedKmH: 87,
+      licensePlate: 'WHT-519',
+      plateConfidence: 0.92,
+      violations: [] as ViolationType[],
+      keyframes: [
+        { t: 13.0, x: 46.5, y: 88.0, w: 15.0, h: 13.5 },
+        { t: 13.9, x: 46.8, y: 87.5, w: 14.8, h: 12.5 },
+        { t: 15.2, x: 52.0, y: 68.0, w: 10.5, h: 11.5 },
+        { t: 16.5, x: 55.5, y: 52.0, w: 7.5, h: 8.5 },
+        { t: 18.0, x: 57.5, y: 38.0, w: 5.0, h: 6.0 },
+      ]
+    },
+    // 8. Oncoming White Coach Bus ("Charmbuss", #350) on Left Road (t=17.0 to 22.2s)
     {
       id: 'det-h350',
       trackingId: 350,
       vehicleType: 'bus' as const,
-      confidence: 0.98,
+      confidence: 0.99,
       speedKmH: 82,
       licensePlate: 'CHM-880',
-      plateConfidence: 0.94,
+      plateConfidence: 0.95,
       violations: [] as ViolationType[],
       keyframes: [
-        { t: 15.5, x: 40.0, y: 28.0, w: 5.0, h: 6.0 },
-        { t: 17.5, x: 30.0, y: 32.0, w: 8.0, h: 9.5 },
-        { t: 19.0, x: 18.0, y: 34.0, w: 12.5, h: 13.5 },
-        { t: 20.4, x: 6.5, y: 22.0, w: 20.5, h: 24.0 },
-        { t: 21.2, x: 0.0, y: 20.0, w: 24.0, h: 26.0 },
+        { t: 17.0, x: 35.0, y: 30.5, w: 5.5, h: 6.5 },
+        { t: 18.5, x: 26.0, y: 33.0, w: 8.5, h: 9.5 },
+        { t: 19.5, x: 12.0, y: 34.5, w: 13.5, h: 14.5 },
+        { t: 20.4, x: 0.0, y: 35.4, w: 17.2, h: 18.8 },
+        { t: 21.5, x: 0.0, y: 38.0, w: 19.5, h: 21.0 },
+        { t: 22.2, x: 0.0, y: 42.0, w: 22.0, h: 23.0 },
       ]
     },
-    // 7. Oncoming White Compact Hatchback (#319) on Left Road (t=17.5 to 21.0s)
+    // 9. Dark Blue Sedan in Lane 2 (#322, t=19.5 to 23.5s)
     {
-      id: 'det-h319',
-      trackingId: 319,
+      id: 'det-h322',
+      trackingId: 322,
       vehicleType: 'car' as const,
       confidence: 0.96,
-      speedKmH: 86,
-      licensePlate: 'WHT-519',
-      plateConfidence: 0.91,
+      speedKmH: 88,
+      licensePlate: 'BLU-902',
+      plateConfidence: 0.92,
       violations: [] as ViolationType[],
       keyframes: [
-        { t: 17.5, x: 33.0, y: 31.5, w: 3.8, h: 4.2 },
-        { t: 19.0, x: 20.0, y: 39.0, w: 7.5, h: 8.0 },
-        { t: 20.4, x: 1.6, y: 52.9, w: 13.9, h: 18.5 },
-        { t: 21.0, x: 0.0, y: 60.0, w: 15.0, h: 19.0 },
+        { t: 19.5, x: 55.0, y: 84.0, w: 13.5, h: 16.5 },
+        { t: 20.4, x: 54.7, y: 67.7, w: 10.2, h: 15.6 },
+        { t: 21.8, x: 55.5, y: 52.0, w: 7.5, h: 9.5 },
+        { t: 23.0, x: 56.5, y: 38.0, w: 5.0, h: 6.5 },
+        { t: 23.5, x: 57.0, y: 32.0, w: 4.0, h: 5.0 },
       ]
     },
-    // 8. Maroon Mercedes Sedan (#324) in Lane 2 (Distanced ahead at 29.3s on road)
+    // 10. Dark Maroon Sedan (#324) in Lane 2 (t=23.5 to 27.5s)
     {
       id: 'det-h324',
       trackingId: 324,
@@ -207,16 +238,17 @@ export const VideoMonitoringPanel: React.FC<VideoMonitoringPanelProps> = ({
       confidence: 0.96,
       speedKmH: 94,
       licensePlate: 'WDB-124',
-      plateConfidence: 0.91,
+      plateConfidence: 0.92,
       violations: ['illegal_lane_change'] as ViolationType[],
       keyframes: [
-        { t: 25.0, x: 62.5, y: 58.0, w: 7.0, h: 7.5 },
-        { t: 27.0, x: 63.5, y: 44.0, w: 4.5, h: 5.0 },
-        { t: 29.35, x: 64.8, y: 35.0, w: 2.8, h: 3.3 },
-        { t: 31.5, x: 65.5, y: 28.0, w: 2.0, h: 2.5 },
+        { t: 23.5, x: 64.0, y: 78.0, w: 11.5, h: 13.0 },
+        { t: 24.5, x: 64.2, y: 58.0, w: 8.5, h: 9.8 },
+        { t: 25.5, x: 64.4, y: 37.5, w: 3.9, h: 4.6 },
+        { t: 26.5, x: 65.0, y: 28.5, w: 2.8, h: 3.5 },
+        { t: 27.5, x: 65.5, y: 22.0, w: 2.0, h: 2.6 },
       ]
     },
-    // 9. Dark Blue Estate Wagon (#326) in Lane 3 (SPEEDING: 112 km/h, distanced ahead at 29.3s on road)
+    // 11. Silver Station Wagon (#326) in Lane 3 (SPEEDING: 112 km/h, t=23.8 to 27.5s)
     {
       id: 'det-h326',
       trackingId: 326,
@@ -225,16 +257,17 @@ export const VideoMonitoringPanel: React.FC<VideoMonitoringPanelProps> = ({
       speedKmH: 112,
       isSpeeding: true,
       licensePlate: 'YTR-990',
-      plateConfidence: 0.93,
+      plateConfidence: 0.94,
       violations: ['speed_violation'] as ViolationType[],
       keyframes: [
-        { t: 25.0, x: 72.0, y: 58.0, w: 7.0, h: 7.5 },
-        { t: 27.0, x: 71.0, y: 44.0, w: 4.5, h: 5.0 },
-        { t: 29.35, x: 70.0, y: 35.4, w: 3.1, h: 3.3 },
-        { t: 31.5, x: 68.5, y: 28.0, w: 2.0, h: 2.5 },
+        { t: 23.8, x: 74.0, y: 78.0, w: 11.5, h: 13.0 },
+        { t: 24.8, x: 73.0, y: 58.0, w: 8.5, h: 9.8 },
+        { t: 25.5, x: 71.9, y: 37.1, w: 3.9, h: 4.2 },
+        { t: 26.5, x: 70.5, y: 28.5, w: 2.8, h: 3.5 },
+        { t: 27.5, x: 69.5, y: 22.0, w: 2.0, h: 2.6 },
       ]
     },
-    // 10. White Refrigerated Semi-Truck ("N&K Spedition A/S") (#330) in Lane 3 (t=28.2 to 34.5s)
+    // 12. White Refrigerated Semi-Truck ("N&K Spedition A/S", #330) in Lane 3 (t=27.5 to 34.6s)
     {
       id: 'det-h330',
       trackingId: 330,
@@ -245,31 +278,15 @@ export const VideoMonitoringPanel: React.FC<VideoMonitoringPanelProps> = ({
       plateConfidence: 0.96,
       violations: [] as ViolationType[],
       keyframes: [
-        { t: 28.2, x: 73.0, y: 65.0, w: 27.0, h: 35.0 },
-        { t: 29.35, x: 71.8, y: 45.8, w: 28.1, h: 54.2 },
-        { t: 31.0, x: 68.0, y: 37.0, w: 22.0, h: 44.0 },
-        { t: 33.0, x: 66.0, y: 31.0, w: 17.0, h: 34.0 },
-        { t: 34.5, x: 65.0, y: 27.0, w: 13.0, h: 24.0 },
+        { t: 27.5, x: 72.5, y: 68.0, w: 26.0, h: 32.0 },
+        { t: 29.4, x: 71.8, y: 41.7, w: 21.2, h: 50.0 },
+        { t: 30.8, x: 71.0, y: 32.0, w: 14.5, h: 26.0 },
+        { t: 32.2, x: 70.0, y: 24.5, w: 9.0, h: 16.0 },
+        { t: 33.6, x: 69.4, y: 26.2, w: 3.8, h: 6.3 },
+        { t: 34.6, x: 68.8, y: 19.5, w: 2.8, h: 4.5 },
       ]
     },
-    // 11. Oncoming Black Hatchback (#346) on Left Road (Foreground at 29.3s)
-    {
-      id: 'det-h346',
-      trackingId: 346,
-      vehicleType: 'car' as const,
-      confidence: 0.96,
-      speedKmH: 85,
-      licensePlate: 'BLK-412',
-      plateConfidence: 0.92,
-      violations: [] as ViolationType[],
-      keyframes: [
-        { t: 27.0, x: 28.0, y: 36.0, w: 5.0, h: 5.0 },
-        { t: 28.2, x: 16.0, y: 43.0, w: 7.5, h: 7.5 },
-        { t: 29.35, x: 1.3, y: 51.0, w: 10.9, h: 9.8 },
-        { t: 30.0, x: 0.0, y: 58.0, w: 12.0, h: 11.0 },
-      ]
-    },
-    // 12. Oncoming Silver Car (#358) on Left Road (Midground at 29.3s)
+    // 13. Oncoming Silver Car on Left Road (#358, t=28.0 to 31.5s)
     {
       id: 'det-h358',
       trackingId: 358,
@@ -280,13 +297,13 @@ export const VideoMonitoringPanel: React.FC<VideoMonitoringPanelProps> = ({
       plateConfidence: 0.89,
       violations: [] as ViolationType[],
       keyframes: [
-        { t: 27.5, x: 32.0, y: 32.0, w: 3.5, h: 3.2 },
-        { t: 29.35, x: 24.7, y: 37.5, w: 5.3, h: 4.6 },
-        { t: 30.5, x: 14.0, y: 45.0, w: 7.5, h: 6.8 },
-        { t: 31.5, x: 0.0, y: 54.0, w: 10.0, h: 9.0 },
+        { t: 28.0, x: 28.0, y: 34.5, w: 4.0, h: 4.0 },
+        { t: 29.4, x: 20.6, y: 38.8, w: 6.2, h: 5.8 },
+        { t: 30.5, x: 12.0, y: 45.0, w: 8.5, h: 7.5 },
+        { t: 31.5, x: 0.0, y: 53.0, w: 12.0, h: 10.5 },
       ]
     },
-    // 13. Oncoming Dark SUV (#355) on Left Road (Midground at 29.3s)
+    // 14. Oncoming Dark SUV on Left Road (#355, t=28.5 to 32.0s)
     {
       id: 'det-h355',
       trackingId: 355,
@@ -297,10 +314,44 @@ export const VideoMonitoringPanel: React.FC<VideoMonitoringPanelProps> = ({
       plateConfidence: 0.91,
       violations: [] as ViolationType[],
       keyframes: [
-        { t: 27.5, x: 35.0, y: 33.0, w: 4.0, h: 3.8 },
-        { t: 29.35, x: 29.0, y: 38.8, w: 6.4, h: 5.8 },
-        { t: 30.8, x: 18.0, y: 47.0, w: 8.5, h: 7.8 },
-        { t: 32.0, x: 3.0, y: 57.0, w: 11.0, h: 10.0 },
+        { t: 28.5, x: 29.5, y: 35.0, w: 4.5, h: 4.5 },
+        { t: 29.4, x: 24.7, y: 40.6, w: 7.5, h: 6.7 },
+        { t: 30.8, x: 16.0, y: 46.5, w: 9.5, h: 8.5 },
+        { t: 32.0, x: 2.0, y: 54.0, w: 12.5, h: 11.0 },
+      ]
+    },
+    // 15. Oncoming Bright Red Car #2 (#362, t=32.0 to 34.6s)
+    {
+      id: 'det-h362',
+      trackingId: 362,
+      vehicleType: 'car' as const,
+      confidence: 0.97,
+      speedKmH: 87,
+      licensePlate: 'RED-882',
+      plateConfidence: 0.94,
+      violations: [] as ViolationType[],
+      keyframes: [
+        { t: 32.0, x: 38.0, y: 34.0, w: 4.5, h: 4.5 },
+        { t: 33.0, x: 34.0, y: 37.0, w: 5.5, h: 5.5 },
+        { t: 33.6, x: 28.9, y: 39.5, w: 6.3, h: 6.3 },
+        { t: 34.2, x: 19.5, y: 44.0, w: 8.5, h: 8.5 },
+        { t: 34.6, x: 8.0, y: 50.0, w: 11.5, h: 11.0 },
+      ]
+    },
+    // 16. Oncoming Light Blue Car on far left (#365, t=33.2 to 34.6s)
+    {
+      id: 'det-h365',
+      trackingId: 365,
+      vehicleType: 'car' as const,
+      confidence: 0.94,
+      speedKmH: 85,
+      licensePlate: 'BLU-104',
+      plateConfidence: 0.89,
+      violations: [] as ViolationType[],
+      keyframes: [
+        { t: 33.2, x: 4.0, y: 42.0, w: 5.5, h: 6.5 },
+        { t: 33.6, x: 0.0, y: 44.2, w: 6.3, h: 7.5 },
+        { t: 34.6, x: 0.0, y: 55.0, w: 12.0, h: 12.0 },
       ]
     }
   ];
